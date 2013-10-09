@@ -2,7 +2,7 @@
 
 ##### Simple CLI Testing Pseudo-Framework
 
-![Simple CLI Testing Pseudo-Framework](http://img33.imageshack.us/img33/7642/nu5s.png)
+![Simple CLI Testing Pseudo-Framework](http://img59.imageshack.us/img59/1921/p319.png)
 
 ### What!? Why?
 
@@ -21,7 +21,7 @@ bash commands. Well, that and it doesn't really have a name.
     cd /path/to/project/tests
     wget https://raw.github.com/jmervine/CLIunit/latest/CLIunit.sh
     chmod 755 CLIunit.sh
-    
+
     # or for edge updates, use:
     # https://raw.github.com/jmervine/CLIunit/master/CLIunit.sh
 

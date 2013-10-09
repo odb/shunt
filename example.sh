@@ -28,6 +28,9 @@ function run_tests {
   assert_dir "/tmp/cliunit.dir" "should assert directory existence"
   refute_dir "/tmp/cliunit.bad" "should refute directory existence"
 
+  sleep 0.5 # showing Duration > 0
+
+  assert "false" "should fail, to show failure output"
 }
 source ./CLIunit.sh
 
