@@ -19,7 +19,7 @@ bash commands. Well, that and it doesn't really have a name.
 ##### Install
 
     cd /path/to/project/tests
-    wget https://raw.github.com/jmervine/CLIunit/master/CLIunit.sh
+    wget https://raw.github.com/jmervine/CLIunit/latest/CLIunit.sh
     chmod 755 CLIunit.sh
 
 ##### Basic Usage
