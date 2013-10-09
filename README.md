@@ -46,6 +46,8 @@ A basic test file looks like this:
 
 Then simply run this script: `bash ./tests/command_test.sh`
 
+> See example.sh for more examples.
+
 ##### Assertions
 
 Here's a full list of assertions at the time of this writing:
