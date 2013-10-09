@@ -46,6 +46,14 @@
 #
 ################################################################################
 
+# Colors
+
+red='\e[0;31m'
+yellow='\e[1;33m'
+green='\e[1;32m'
+blue='\e[1;34m'
+NC='\e[0m'
+
 # Progress Variables
 passed=0
 failed=0
@@ -184,7 +192,7 @@ function finish {
   echo " "
   echo " "
 
-  echo "Total: `expr $passed + $failed`, Passed: $passed, Failed: $failed, Duration: ${SECONDS}sec"
+  echo -e "${yellow}Total: `expr $passed + $failed`${NC} ${green}Passed: $passed${NC} ${red}Failed: $failed${NC} ${blue}Duration: ${SECONDS} Seconds${NC}"
 
   if [ "$failed" -ne "0" ]; then
     echo " "
