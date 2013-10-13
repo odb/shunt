@@ -208,12 +208,28 @@ function finish {
   echo " "
 }
 
+# Before/After function handling
+##
+if ! type before 2>&1 > /dev/null; then
+function before {
+  true
+}
+fi
+
+if ! type after 2>&1 > /dev/null; then
+function after {
+  true
+}
+fi
+
 ################################################################################
 # Make is so.
 ################################################################################
 echo "(Running from: $PWD)"
+before
 run_tests
 finish
+after
 
 exit $failed
 

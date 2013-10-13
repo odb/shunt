@@ -51,6 +51,20 @@ Then simply run this script: `bash ./tests/command_test.sh`
 
 > See example.sh for more examples.
 
+##### Before / After Hooks
+
+In addition to assertion, CLIunit also supports before and after hooks. Simply define a `before` or `after` function.
+
+    function before {
+        ./some_setup_script.sh
+        echo "Running before CLIunit assertions.
+    }
+
+    function after {
+        ./some_cleanup_script.sh
+        echo "Running after CLIunit assertions.
+    }
+
 ##### Assertions
 
 Here's a full list of assertions at the time of this writing:

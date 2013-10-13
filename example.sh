@@ -8,6 +8,15 @@ mkdir -p /tmp/cliunit.dir
 # Test Examples
 ##
 
+before_check=false
+function before {
+  before_check=true
+}
+
+function after {
+  echo "If you see this, after worked."
+}
+
 function run_tests {
 
   assert "true"  "should assert truth"
@@ -31,6 +40,8 @@ function run_tests {
   sleep 0.5 # showing Duration > 0
 
   assert "false" "should fail, to show failure output"
+
+  assert "$before_check" "before failed"
 }
 source ./CLIunit.sh
 
