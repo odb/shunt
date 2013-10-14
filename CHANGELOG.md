@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 0.0.3
+
+* Adding before and after handling. See README for details.
+
 ### 0.0.2
 
 * Adding color (thanks [jdorfman](https://github.com/jdorfman)).

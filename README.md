@@ -64,6 +64,14 @@ In addition to assertion, CLIunit also supports before and after hooks. Simply d
         echo "Running after CLIunit assertions.
     }
 
+> Note: Currently, if before or after are undefined, a warning is thrown but safely ignored.
+>
+>  Example:
+>
+> `./CLIunit.sh: line 58: type: after: not found`
+>
+> See [Issue #5](https://github.com/jmervine/CLIunit/issues/5)
+
 ##### Assertions
 
 Here's a full list of assertions at the time of this writing:

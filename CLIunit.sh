@@ -1,53 +1,36 @@
 ################################################################################
+#
 # Simple CLI Testing Psudo-Framework
-# > http://mervine.net/simple-cli-testing-framework
+# ----------------------------------
 #
-# Assertions:
-# - assert       "CMD" "FAIL MESSAGE"
-# - refute       "CMD" "FAIL MESSAGE"
-# - assert_equal "FIRST" "SECOND" "FAIL MESSAGE"
-# - refute_equal "FIRST" "SECOND" "FAIL MESSAGE"
-# - assert_numeq "FIRST" "SECOND" "FAIL MESSAGE"
-# - refute_numeq "FIRST" "SECOND" "FAIL MESSAGE"
-# - assert_grep  "CMD" "GREP" "FAIL MESSAGE"
-# - refute_grep  "CMD" "GREP" "FAIL MESSAGE"
-# - assert_file  "FILE" "FAIL MESSAGE"
-# - refute_file  "FILE" "FAIL MESSAGE"
-# - assert_dir   "DIR" "FAIL MESSAGE"
-# - refute_dir   "DIR" "FAIL MESSAGE"
+# Source: https://github.com/jmervine/CLIunit
+# Author: Joshua Mervine (@mervinej)
 #
-# Usage:
-#
-# 1.) Save this to a file -- e.g. `test_helper.sh`
-# 2.) Create test file    -- e.g. `foo_test.sh`
-# 3.) Create tests in test file, like so:
-#
-#  # tests must be with a `run_tests` function
-#  function run_tests {
-#
-#    assert "pwd" "pwd not found"
-#
-#    assert_equal "$(pwd)" "/usr/bin"
-#      "not in /usr/bin"
-#
-#    refute "foobar" "foobar found"
-#
-#    assert_grep "echo foobar" "foobar" \
-#      "expected to see foobar but didn't"
-#
-#  }
-#
-# 4.) Source your `test_helper.sh` (this file) at the bottom of your test
-#     file (`foo_tesh.sh`), like so:
-#
-#  source test_helper.sh
-#
-# 5.) Run your tests: `bash ./foo_tesh.sh`
+# ----------------------------------
+# Contributors:
+# ----------------------------------
+# - Justin Dorfman (@jdorfman)
 #
 ################################################################################
 
-# Colors
+# Before/After function handling
+##
+type before 2>&1 > /dev/null
+if [ "$?" -ne "0" ]; then
+function before {
+  true
+}
+fi
 
+type after 2>&1 > /dev/null
+if [ "$?" -ne "0" ]; then
+function after {
+  true
+}
+fi
+
+# Colors
+##
 if ! test "$NO_COLORS"; then
   red='\e[0;31m'
   yellow='\e[1;33m'
@@ -207,20 +190,6 @@ function finish {
   fi
   echo " "
 }
-
-# Before/After function handling
-##
-if ! type before 2>&1 > /dev/null; then
-function before {
-  true
-}
-fi
-
-if ! type after 2>&1 > /dev/null; then
-function after {
-  true
-}
-fi
 
 ################################################################################
 # Make is so.

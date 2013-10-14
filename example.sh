@@ -45,3 +45,4 @@ function run_tests {
 }
 source ./CLIunit.sh
 
+# vim: ft=sh:
