@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 ################################################################################
 #
 # Simple CLI Testing Psudo-Framework
@@ -15,19 +16,21 @@
 
 # Before/After function handling
 ##
-type before 2>&1 > /dev/null
-if [ "$?" -ne "0" ]; then
-function before {
-  true
-}
-fi
+function ensure_handlers {
+  type before 2>&1 > /dev/null
+  if [ "$?" -ne "0" ]; then
+    function before {
+      true
+    }
+  fi
 
-type after 2>&1 > /dev/null
-if [ "$?" -ne "0" ]; then
-function after {
-  true
+  type after 2>&1 > /dev/null
+  if [ "$?" -ne "0" ]; then
+    function after {
+      true
+    }
+  fi
 }
-fi
 
 # Colors
 ##
@@ -191,14 +194,36 @@ function finish {
   echo " "
 }
 
+function reset {
+  unset before
+  unset after
+  unset passed
+  unset failed
+  unset faulures
+}
+
+function CLIunit {
+  ensure_handlers
+  before
+  run_tests
+  after
+  finish
+  reset
+}
+
 ################################################################################
 # Make is so.
 ################################################################################
-echo "(Running from: $PWD)"
-before
-run_tests
-finish
-after
+if test "$1"; then
+  for f in "$@"; do
+    echo "(Running $f from: $PWD)"
+    source $f
+    CLIunit
+  done
+else
+  echo "(Running from: $PWD)"
+  CLIunit
+fi
 
 exit $failed
 

@@ -6,6 +6,15 @@ touch /tmp/cliunit.file
 mkdir -p /tmp/cliunit.dir
 
 # Test Examples
+# -------------
+#
+# NOTE: This is the legacy way of using 'CLIunit' (0.0.x version)
+# whereby CLIunit is sourced at the end of the suite.
+#
+# I'm keeping this functionality, for backwards compatability and
+# certain uses cases where it make sense (they may exist).
+#
+# The functionality may be depricated in the future.
 ##
 
 before_check=false

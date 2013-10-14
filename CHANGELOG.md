@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 0.1.0
+
+* Supporting ./CLIunit.sh ./test.sh method of running. See Issue #2.
+
 ### 0.0.3
 
 * Adding before and after handling. See README for details.

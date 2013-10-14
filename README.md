@@ -2,11 +2,11 @@
 
 ##### Simple CLI Testing Pseudo-Framework
 
-![Simple CLI Testing Pseudo-Framework](http://img59.imageshack.us/img59/1921/p319.png)
+![Simple CLI Testing Pseudo-Framework](http://oi40.tinypic.com/2052w68.jpg)
 
 ### What!? Why?
 
-For a recent project ([Autobench](http://mervine.net/gems/autobench)), I wanted a very simple way to run some simple tests against my CLI output.
+For a recent project, I wanted a very simple way to run some simple tests against my CLI output.
 I know there are a number of these kinds of things out there, but most of the ones I looked at were more complex then I wanted.
 To start, I created a basic shell script to test my CLI, but as I began to add to it, and want more from it, I decided to take
 a few minutes and build a pseudo-framework out of it.
@@ -20,6 +20,7 @@ bash commands. Well, that and it doesn't really have a name.
 
     cd /path/to/project/tests
     wget https://raw.github.com/jmervine/CLIunit/latest/CLIunit.sh -O CLIunit.sh
+    chmod 755 CLIunit.sh  # << required
 
     # or for edge updates, use:
     # https://raw.github.com/jmervine/CLIunit/master/CLIunit.sh
@@ -28,7 +29,8 @@ bash commands. Well, that and it doesn't really have a name.
 
 A basic test file looks like this:
 
-    #!/usr/bin/env bash
+    # file: tests.sh
+
     function run_tests {
     ####################################################
     # Tests go here.
@@ -44,11 +46,12 @@ A basic test file looks like this:
         "work with required arg"
     ####################################################
     }
-    source ./tests/CLIunit.sh
 
-Then simply run this script: `bash ./tests/command_test.sh`
+Run like this:
 
-> See example.sh for more examples.
+    $ ./CLIunit.sh ./tests.sh
+
+> See `test/testOne.sh` for more examples.
 
 ##### Before / After Hooks
 
