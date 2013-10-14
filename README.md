@@ -19,7 +19,7 @@ bash commands. Well, that and it doesn't really have a name.
 ##### Install
 
     cd /path/to/project/tests
-    wget https://raw.github.com/jmervine/CLIunit/latest/CLIunit.sh
+    wget https://raw.github.com/jmervine/CLIunit/latest/CLIunit.sh -O CLIunit.sh
 
     # or for edge updates, use:
     # https://raw.github.com/jmervine/CLIunit/master/CLIunit.sh
