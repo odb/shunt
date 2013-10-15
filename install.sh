@@ -4,6 +4,7 @@ set -eET
 
 # setup
 ##
+test "$1" && version=$1
 test "$version" || version="latest"
 source="https://raw.github.com/jmervine/CLIunit/$version/CLIunit.sh"
 target="CLIunit.sh"
