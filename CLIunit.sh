@@ -16,7 +16,7 @@
 
 # Before/After function handling
 ##
-function ensure_handlers {
+function __ensure_handlers {
   type before 2>&1 > /dev/null
   if [ "$?" -ne "0" ]; then
     function before {
@@ -35,17 +35,17 @@ function ensure_handlers {
 # Colors
 ##
 if ! test "$NO_COLORS"; then
-  red='\e[0;31m'
-  yellow='\e[1;33m'
-  green='\e[1;32m'
-  blue='\e[1;34m'
-  NC='\e[0m'
+  __red='\e[0;31m'
+  __yellow='\e[1;33m'
+  __green='\e[1;32m'
+  __blue='\e[1;34m'
+  __NC='\e[0m'
 fi
 
 # Progress Variables
-passed=0
-failed=0
-failures=""
+__passed=0
+__failed=0
+__failures=""
 
 ################################################################################
 # Assertions
@@ -163,52 +163,52 @@ function process {
   status=$1
   msg=$2
   if [ "$status" -eq "0" ]; then
-    do_pass
+    __do_pass
   else
-    do_fail "$msg"
+    __do_fail "$msg"
   fi
 }
-function do_pass {
-  echo -ne "${green}.${NC}"
-  passed=`expr $passed + 1`
+function __do_pass {
+  echo -ne "${__green}.${__NC}"
+  __passed=`expr $__passed + 1`
 }
 
-function do_fail {
-  echo -ne "${red}x${NC}"
-  failed=`expr $failed + 1`
-  failures+="$failed] $1\n"
+function __do_fail {
+  echo -ne "${__red}x${__NC}"
+  __failed=`expr $__failed + 1`
+  __failures+="$__failed] $1\n"
 }
 
 function finish {
   echo " "
   echo " "
 
-  echo -e "${yellow}Total: `expr $passed + $failed`${NC} ${green}Passed: $passed${NC} ${red}Failed: $failed${NC} ${blue}Duration: ${SECONDS} Seconds${NC}"
+  echo -e "${__yellow}Total: `expr $__passed + $__failed`${__NC} ${__green}Passed: $__passed${__NC} ${__red}Failed: $__failed${__NC} ${__blue}Duration: ${SECONDS} Seconds${__NC}"
 
-  if [ "$failed" -ne "0" ]; then
+  if [ "$__failed" -ne "0" ]; then
     echo " "
-    echo "Failures: "
+    echo "__failures: "
     echo " "
-    echo -e "${red}$failures${NC}"
+    echo -e "${__red}$__failures${__NC}"
   fi
   echo " "
 }
 
-function reset {
+function __reset {
   unset before
   unset after
-  unset passed
-  unset failed
-  unset faulures
+  unset __passed
+  unset __failed
+  unset __failures
 }
 
-function CLIunit {
-  ensure_handlers
+function __CLIunit {
+  __ensure_handlers
   before
   run_tests
   after
   finish
-  reset
+  __reset
 }
 
 ################################################################################
@@ -218,13 +218,13 @@ if test "$1"; then
   for f in "$@"; do
     echo "(Running $f from: $PWD)"
     source $f
-    CLIunit
+    __CLIunit
   done
 else
   echo "(Running from: $PWD)"
-  CLIunit
+  __CLIunit
 fi
 
-exit $failed
+exit $__failed
 
 # vim: ft=sh:

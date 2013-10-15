@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-./CLIunit.sh ./testOne.sh ./testTwo.sh
+./CLIunit.sh ./test/testOne.sh ./test/testTwo.sh
 
 # vim: ft=sh:
