@@ -18,12 +18,24 @@ bash commands. Well, that and it doesn't really have a name.
 
 ##### Install
 
+Note, in CLIunit `latest` means latest stable version.
+
+    curl -L https://raw.github.com/jmervine/CLIunit/master/install.sh | bash
+    # installs latest to ~/.bin/cliunit
+
+    curl -L https://raw.github.com/jmervine/CLIunit/master/install.sh | bash -s master
+    # installs master to ~/.bin/cliunit
+
+    curl -L https://raw.github.com/jmervine/CLIunit/master/install.sh | sudo bash
+    # installs latest to /usr/local/bin/cliunit
+
+    curl -L https://raw.github.com/jmervine/CLIunit/master/install.sh | sudo bash -s master
+    # installs master to /usr/local/bin/cliunit
+
+    # local directory installs
     cd /path/to/project/tests
     wget https://raw.github.com/jmervine/CLIunit/latest/CLIunit.sh -O CLIunit.sh
     chmod 755 CLIunit.sh  # << required
-
-    # or for edge updates, use:
-    # https://raw.github.com/jmervine/CLIunit/master/CLIunit.sh
 
 ##### Basic Usage
 
