@@ -14,6 +14,40 @@
 #
 ################################################################################
 
+CLIUNIT_VERSION="0.1.1"
+
+if echo "$*" | grep "\-\-version" > /dev/null; then
+  echo "$0 version $CLIUNIT_VERSION"
+  exit 0
+fi
+
+__usage() {
+cat << EOF
+Usage: $0 <test files>
+
+Options:
+--no-color  Disable colors.
+--version   Display version information.
+--help      Display this message.
+
+EOF
+exit 0
+}
+
+options="$*"
+if echo "$options" | grep "\-\-help" > /dev/null; then
+  __usage
+fi
+
+if echo "$options" | grep "\-h" > /dev/null; then
+  __usage
+fi
+
+if echo "$options" | grep "\-\-no\-color" > /dev/null; then
+  NO_COLORS=true
+  options="$(echo "$options" | sed 's/--no-color//')"
+fi
+
 # Before/After function handling
 ##
 function __ensure_handlers {
@@ -34,6 +68,11 @@ function __ensure_handlers {
 
 # Colors
 ##
+#__red=''
+#__yellow=''
+#__green=''
+#__blue=''
+#__NC=''
 if ! test "$NO_COLORS"; then
   __red='\e[0;31m'
   __yellow='\e[1;33m'
@@ -214,8 +253,8 @@ function __CLIunit {
 ################################################################################
 # Make is so.
 ################################################################################
-if test "$1"; then
-  for f in "$@"; do
+if test "$options"; then
+  for f in $options; do
     echo "(Running $f from: $PWD)"
     source $f
     __CLIunit

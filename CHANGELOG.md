@@ -1,5 +1,11 @@
 ## CHANGELOG
 
+### 0.1.1
+
+* Obfuscating internal functions and variables.
+* Adding installer (see README).
+* Adding argument support for CLIunit.sh (see: '--help')
+
 ### 0.1.0
 
 * Supporting ./CLIunit.sh ./test.sh method of running. See Issue #2.
