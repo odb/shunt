@@ -26,16 +26,11 @@ Note, in CLIunit `latest` means latest stable version.
     curl -L https://raw.github.com/jmervine/CLIunit/master/install.sh | bash -s master
     # installs master to ~/.bin/cliunit
 
-    curl -L https://raw.github.com/jmervine/CLIunit/master/install.sh | sudo bash
+    curl -L https://raw.github.com/jmervine/CLIunit/master/install.sh | bash -s --global
     # installs latest to /usr/local/bin/cliunit
 
-    curl -L https://raw.github.com/jmervine/CLIunit/master/install.sh | sudo bash -s master
-    # installs master to /usr/local/bin/cliunit
-
-    # local directory installs
-    cd /path/to/project/tests
-    wget https://raw.github.com/jmervine/CLIunit/latest/CLIunit.sh -O CLIunit.sh
-    chmod 755 CLIunit.sh  # << required
+    curl -L https://raw.github.com/jmervine/CLIunit/master/install.sh | bash -s --local
+    # installs latest to ./CLIunit.sh
 
 ##### Basic Usage
 
