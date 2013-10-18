@@ -1,4 +1,4 @@
-# CLIunit
+# [CLIunit](https://github.com/jmervine/CLIunit)
 
 ##### Simple CLI Testing Pseudo-Framework
 
