@@ -10,9 +10,9 @@ __usage()
 Usage: $0 [BRANCH] [INSTALL METHOD]
 
  INSTALL METHOD:
-    --global   Install globally.
-    --user     Install to user. (default)
-    --local    Install to current directory.
+    global   Install globally.
+    user     Install to user. (default)
+    local    Install to current directory.
 
  OPTIONS:
     --help     Show this message.
@@ -27,21 +27,21 @@ if test "$*"; then
   if echo "$options" | grep "\-\-help" > /dev/null; then
     __usage
   fi
-  if echo "$options" | grep "\-\-global" > /dev/null; then
+  if echo "$options" | grep "global" > /dev/null; then
     install_method=global
-    options="$(echo "$options" | sed 's/--global//')"
+    options="$(echo "$options" | sed 's/global//')"
     install_path="/usr/local/bin"
     if (( UID != 0 )); then
       _sudo="sudo "
     fi
-  elif echo "$options" | grep "\-\-local" > /dev/null; then
+  elif echo "$options" | grep "local" > /dev/null; then
     install_method=local
     install_path="."
-    options="$(echo "$options" | sed 's/--local//')"
-  elif echo "$options" | grep "\-\-user" > /dev/null; then
+    options="$(echo "$options" | sed 's/local//')"
+  elif echo "$options" | grep "user" > /dev/null; then
     install_method=user
     install_path="$HOME/.bin"
-    options="$(echo "$options" | sed 's/--user//')"
+    options="$(echo "$options" | sed 's/user//')"
   fi
 fi
 
