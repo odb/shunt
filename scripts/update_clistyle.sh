@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Grabs the latest version of clistyle.sh (working title) and imports it
+# in to CLIunit.sh
 set -xue
 curl -L https://raw.github.com/jmervine/clistrap/master/clistyle.sh > clistyle.sh
 awk '/CLISTYLE:START/,/CLISTYLE:END/' clistyle.sh | grep -v "CLISTYLE:\(START\|END\)" > tmp
