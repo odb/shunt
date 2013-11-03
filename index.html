@@ -8,37 +8,45 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-    <title>cliunit by jmervine</title>
+    <title>shunt by jmervine</title>
   </head>
 
   <body>
 
     <header>
       <div class="container">
-        <h1>cliunit</h1>
-        <h2>Simple CLI Testing Pseudo-Framework</h2>
+        <h1>shunt</h1>
+        <h2>Simple Shell Testing Pseudo-Framework</h2>
 
         <section id="downloads">
-          <a href="https://github.com/jmervine/CLIunit/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/jmervine/CLIunit/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/jmervine/CLIunit" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+          <a href="https://github.com/jmervine/shunt/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/jmervine/shunt/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/jmervine/shunt" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
         </section>
       </div>
     </header>
 
     <div class="container">
       <section id="main_content">
-        <h5>
-<a name="simple-cli-testing-pseudo-framework" class="anchor" href="#simple-cli-testing-pseudo-framework"><span class="octicon octicon-link"></span></a>Simple CLI Testing Pseudo-Framework</h5>
+        <h1>
+<a name="shunt" class="anchor" href="#shunt"><span class="octicon octicon-link"></span></a><a href="https://github.com/jmervine/shunt">shunt</a>
+</h1>
 
-<p><img src="http://oi40.tinypic.com/2052w68.jpg" alt="Simple CLI Testing Pseudo-Framework"></p>
+<h5>
+<a name="simple-shell-testing-pseudo-framework" class="anchor" href="#simple-shell-testing-pseudo-framework"><span class="octicon octicon-link"></span></a>Simple Shell Testing Pseudo-Framework</h5>
+
+<p><img src="screenshots/shunt.png" alt="Simple Shell Testing Pseudo-Framework"></p>
+
+<p><img src="screenshots/shunt_verbose.png" alt="Simple Shell Testing Pseudo-Framework"></p>
+
+<p><img src="screenshots/shunt_quiet.png" alt="Simple Shell Testing Pseudo-Framework"></p>
 
 <h3>
 <a name="what-why" class="anchor" href="#what-why"><span class="octicon octicon-link"></span></a>What!? Why?</h3>
 
-<p>For a recent project, I wanted a very simple way to run some simple tests against my CLI output.
+<p>For a recent project, I wanted a very simple way to run some simple tests against my script output.
 I know there are a number of these kinds of things out there, but most of the ones I looked at were more complex then I wanted.
-To start, I created a basic shell script to test my CLI, but as I began to add to it, and want more from it, I decided to take
+To start, I created a basic shell script to test my scripts, but as I began to add to it, and want more from it, I decided to take
 a few minutes and build a pseudo-framework out of it.</p>
 
 <p>I call it a "pseudo-framework" because it's really more of a helper, which gives you a handfull of assertions to run against
@@ -50,19 +58,19 @@ bash commands. Well, that and it doesn't really have a name.</p>
 <h5>
 <a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h5>
 
-<p>Note, in CLIunit <code>latest</code> means latest stable version.</p>
+<p>Note, in shunt <code>latest</code> means latest stable version.</p>
 
-<pre><code>curl -L https://raw.github.com/jmervine/CLIunit/master/install.sh | bash
-# installs latest to ~/.bin/cliunit
+<pre><code>curl -L https://raw.github.com/jmervine/shunt/master/install.sh | bash
+# installs latest to ~/.bin/shunt
 
-curl -L https://raw.github.com/jmervine/CLIunit/master/install.sh | bash -s master
-# installs master to ~/.bin/cliunit
+curl -L https://raw.github.com/jmervine/shunt/master/install.sh | bash -s master
+# installs master to ~/.bin/shunt
 
-curl -L https://raw.github.com/jmervine/CLIunit/master/install.sh | bash -s global
-# installs latest to /usr/local/bin/cliunit
+curl -L https://raw.github.com/jmervine/shunt/master/install.sh | bash -s global
+# installs latest to /usr/local/bin/shunt
 
-curl -L https://raw.github.com/jmervine/CLIunit/master/install.sh | bash -s master local
-# installs master to ./CLIunit.sh
+curl -L https://raw.github.com/jmervine/shunt/master/install.sh | bash -s master local
+# installs master to ./shunt.sh
 </code></pre>
 
 <h5>
@@ -91,8 +99,20 @@ function run_tests {
 
 <p>Run like this:</p>
 
-<pre><code>$ ./CLIunit.sh ./tests.sh
+<pre><code>$ ./shunt.sh ./tests.sh
 </code></pre>
+
+<p>Usage:</p>
+
+<div class="highlight highlight-bash"><pre>Usage: ./shunt.sh &lt;<span class="nb">test </span>files&gt;
+
+Options:
+--plain    Disable colors and icons.
+--quiet    Do not print error messages.
+--verbose  Display success messages.
+--version  Display version information.
+--help     Display this message.
+</pre></div>
 
 <blockquote>
 <p>See <code>test/testOne.sh</code> for more examples.</p>
@@ -101,24 +121,17 @@ function run_tests {
 <h5>
 <a name="before--after-hooks" class="anchor" href="#before--after-hooks"><span class="octicon octicon-link"></span></a>Before / After Hooks</h5>
 
-<p>In addition to assertion, CLIunit also supports before and after hooks. Simply define a <code>before</code> or <code>after</code> function.</p>
+<p>In addition to assertion, shunt also supports before and after hooks. Simply define a <code>before</code> or <code>after</code> function.</p>
 
 <pre><code>function before {
     ./some_setup_script.sh
-    echo "Running before CLIunit assertions.
+    echo "Running before shunt assertions.
 }
 
 function after {
     ./some_cleanup_script.sh
-    echo "Running after CLIunit assertions.
+    echo "Running after shunt assertions.
 }
-</code></pre>
-
-<p>Note: Currently, if before or after are undefined, a warning is thrown but safely ignored. See <a href="https://github.com/jmervine/CLIunit/issues/5">Issue #5</a> for details and updates.</p>
-
-<p>Example:</p>
-
-<pre><code>./CLIunit.sh: line 58: type: after: not found`
 </code></pre>
 
 <h5>
@@ -144,6 +157,16 @@ function after {
 
 <p>Currently, <code>assert_grep</code> and <code>refute_grep</code> only support a single word, no spaces. I'm sure there's a simple solution to this, but I haven't had
 a change to troubleshoot it yet and it wasn't an issue for my use case.</p>
+
+<h3>
+<a name="development" class="anchor" href="#development"><span class="octicon octicon-link"></span></a>Development</h3>
+
+<ul>
+<li>To run tests use: <code>make test</code>
+</li>
+<li>To update clistyle.sh, use: <code>make clistyle</code>
+</li>
+</ul>
       </section>
     </div>
 
