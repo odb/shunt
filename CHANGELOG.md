@@ -1,5 +1,13 @@
 ## CHANGELOG
 
+### 0.1.2
+
+* Adding CLIstyle for coloring and icons.
+* Depricating legacy method of sourcing CLIunit.
+* Adding error trapping and output. Disabled via quite flag.
+* Adding verbose test output via verbose flag.
+* Fixing issues with before and after show errors when not present. See Issue #5.
+
 ### 0.1.1
 
 * Obfuscating internal functions and variables.

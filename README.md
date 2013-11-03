@@ -2,7 +2,9 @@
 
 ##### Simple CLI Testing Pseudo-Framework
 
-![Simple CLI Testing Pseudo-Framework](http://oi40.tinypic.com/2052w68.jpg)
+![Simple CLI Testing Pseudo-Framework](screenshots/cliunit_verbose.png)
+
+![Simple CLI Testing Pseudo-Framework](screenshots/cliunit_quiet.png)
 
 ### What!? Why?
 
@@ -58,6 +60,18 @@ Run like this:
 
     $ ./CLIunit.sh ./tests.sh
 
+Usage:
+``` bash
+Usage: ./CLIunit.sh <test files>
+
+Options:
+--plain    Disable colors and icons.
+--quiet    Do not print error messages.
+--verbose  Display success messages.
+--version  Display version information.
+--help     Display this message.
+```
+
 > See `test/testOne.sh` for more examples.
 
 ##### Before / After Hooks
@@ -73,13 +87,6 @@ In addition to assertion, CLIunit also supports before and after hooks. Simply d
         ./some_cleanup_script.sh
         echo "Running after CLIunit assertions.
     }
-
-Note: Currently, if before or after are undefined, a warning is thrown but safely ignored. See [Issue #5](https://github.com/jmervine/CLIunit/issues/5) for details and updates.
-
-Example:
-```
-./CLIunit.sh: line 58: type: after: not found`
-```
 
 ##### Assertions
 

@@ -14,8 +14,9 @@
 #
 ################################################################################
 
-CLIUNIT_VERSION="0.1.1"
+CLIUNIT_VERSION="0.1.2"
 
+# Including an
 # Update version with `make clistyle`
 #CLISTYLE:START
 #************************************************#
@@ -29,6 +30,8 @@ CLIUNIT_VERSION="0.1.1"
 #       Kiyor Cia, Jeff Foard FLOZz' MISC,
 #           Mark Otto & Dave Gandy
 #
+#     NOTE: clistyle is a working title and may
+#     change at any time.
 #
 #     https://github.com/jdorfman/clistyle
 #************************************************#
@@ -222,15 +225,24 @@ cat << EOF
 Usage: $0 <test files>
 
 Options:
---no-style  Disable colors and icons.
---version   Display version information.
---help      Display this message.
+--plain    Disable colors and icons.
+--quiet    Do not print error messages.
+--verbose  Display success messages.
+--version  Display version information.
+--help     Display this message.
 
 EOF
 exit 0
 }
 
 options="$*"
+
+# Usage - TODO: iterate of arguments
+##
+if ! test "$options"; then
+  __usage
+fi
+
 if echo "$options" | grep "\-\-help" > /dev/null; then
   __usage
 fi
@@ -239,23 +251,41 @@ if echo "$options" | grep "\-h" > /dev/null; then
   __usage
 fi
 
-NO_STYLE=false
-if echo "$options" | grep "\-\-no\-style" > /dev/null; then
-  NO_STYLE=true
-  options="$(echo "$options" | sed 's/--no-style//')"
+# Style
+##
+__no_style=false
+if echo "$options" | grep "\-\-plain" > /dev/null; then
+  __no_style=true
+  options="$(echo "$options" | sed 's/--plain//')"
+fi
+
+# quiet
+##
+__quiet=false
+if echo "$options" | grep "\-\-quiet" > /dev/null; then
+  __quiet=true
+  options="$(echo "$options" | sed 's/--quiet//')"
+fi
+
+# Verbose
+##
+__verbose=false
+if echo "$options" | grep "\-\-verbose" > /dev/null; then
+  __verbose=true
+  options="$(echo "$options" | sed 's/--verbose//')"
 fi
 
 # Before/After function handling
 ##
 function __ensure_handlers {
-  type before 2>&1 > /dev/null
+  _="$( { type before; } 2>&1 )"
   if [ "$?" -ne "0" ]; then
     function before {
       true
     }
   fi
 
-  type after 2>&1 > /dev/null
+  _="$( { type after; } 2>&1 )"
   if [ "$?" -ne "0" ]; then
     function after {
       true
@@ -264,134 +294,122 @@ function __ensure_handlers {
 }
 
 # Progress Variables
-__passed=0
-__failed=0
-__failures=""
+__total=0; __passed=0; __failed=0; __failures=""; __successes=""
 
 ################################################################################
 # Assertions
 ################################################################################
 function assert {
-  cmd=$1 # what to run
-  msg=$2 # what to say on fail
-
-  $cmd 2>&1 > /dev/null
-  process "$?" "$msg"
+  local cmd=$1
+  local msg="[assert] $2"
+  err="$( { $cmd; } 2>&1 )"
+  process "$?" "$msg" "$cmd" "$err"
+  unset err # status is unavailable when err is set to local
 }
 
 function refute {
-  cmd=$1 # what to run
-  msg=$2 # what to say on fail
-
-  $cmd 2>&1 > /dev/null
+  local cmd=$1
+  local msg="[refute] $2"
+  _="$( { $cmd; } 2>&1)"
   [ "$?" -ne "0" ]
-  process "$?" "$msg"
+  process "$?" "$msg" "$cmd" "non-zero exit status"
 }
 
 function assert_equal {
-  one=$1 # what to run
-  two=$2 # what to run
-  msg=$3 # what to say on fail
-
+  local one=$1
+  local two=$2
+  local msg="[assert_equal] $3"
   [ "$one" = "$two" ]
-  process "$?" "$msg"
+  process "$?" "$msg" "" "'$one' does not equal '$two'"
 }
 
 function refute_equal {
-  one=$1 # what to run
-  two=$2 # what to run
-  msg=$3 # what to say on fail
-
+  local one=$1
+  local two=$2
+  local msg="[refute_equal] $3"
   [ "$one" != "$two" ]
-  process "$?" "$msg"
+  process "$?" "$msg" "" "'$one' equals '$two'"
 }
 
 function assert_numeq {
-  one=$1 # what to run
-  two=$2 # what to run
-  msg=$3 # what to say on fail
-
+  local one=$1
+  local two=$2
+  local msg="[assert_numeq] $3"
   [ "$one" -eq "$two" ]
-  process "$?" "$msg"
+  process "$?" "$msg" "" "'$one' does not equal '$two'"
 }
 
 function refute_numeq {
-  one=$1 # what to run
-  two=$2 # what to run
-  msg=$3 # what to say on fail
-
+  local one=$1
+  local two=$2
+  local msg="[refute_numeq] $3"
   [ "$one" -ne "$two" ]
-  process "$?" "$msg"
+  process "$?" "$msg" "" "'$one' equals '$two'"
 }
 
 function assert_grep {
-  cmd=$1 # what to run
-  inc=$2 # what to grep for
-  msg=$3 # what to say on fail
-
-  $cmd | grep $inc 2>&1 > /dev/null
-  process "$?" "$msg"
+  local cmd=$1
+  local inc=$2
+  local msg="[assert_grep] $3"
+  _="$( { $cmd | grep $inc; } 2>&1 )"
+  process "$?" "$msg" "" "'$cmd' does not include '$inc'"
 }
 
 function refute_grep {
-  cmd=$1 # what to run
-  inc=$2 # what to grep for
-  msg=$3 # what to say on fail
-
-  $cmd | grep -v $inc 2>&1 > /dev/null
-  process "$?" "$msg"
+  local cmd=$1
+  local inc=$2
+  local msg="[refute_grep] $3"
+  _="$( { $cmd | grep -v $inc; } 2>&1 )"
+  process "$?" "$msg" "" "'$cmd' includes '$inc'"
 }
 
 function assert_file {
-  file=$1 # file to check
-  msg=$2  # what to say on fail
-
-  test -f $file 2>&1 > /dev/null
-  process "$?" "$msg"
+  local file=$1
+  local msg="[assert_file] $2"
+  _="$( { test -f $file; } 2>&1 )"
+  process "$?" "$msg" "" "file '$file' does not exist"
 }
 
 function refute_file {
-  file=$1 # file to check
-  msg=$2  # what to say on fail
-
-  test -f $file 2>&1 > /dev/null
+  local file=$1
+  local msg="[refute_file] $2"
+  _="$( { test -f $file; } 2>&1 )"
   [ "$?" -ne "0" ]
-  process "$?" "$msg"
+  process "$?" "$msg" "" "file '$file' exists"
 }
 
 function assert_dir {
-  dir=$1 # dir to check
-  msg=$2  # what to say on fail
-
-  test -d $dir 2>&1 > /dev/null
-  process "$?" "$msg"
+  local dir=$1
+  local msg="[assert_dir] $2"
+  _="$( { test -d $dir; } 2>&1 )"
+  process "$?" "$msg" "" "directory '$dir' does not exist"
 }
 
 function refute_dir {
-  dir=$1 # dir to check
-  msg=$2  # what to say on fail
-
-  test -d $dir 2>&1 > /dev/null
+  local dir=$1
+  local msg="[refute_dir] $2"
+  _="$( { test -d $dir; } 2>&1 )"
   [ "$?" -ne "0" ]
-  process "$?" "$msg"
+  process "$?" "$msg" "" "directory '$dir' exists"
 }
-
 
 ################################################################################
 # Utils
 ################################################################################
 function process {
-  status=$1
-  msg=$2
+  local status=$1
+  local msg=$2
+  local cmd=$3
+  local err=$4
   if [ "$status" -eq "0" ]; then
-    __do_pass
+    __do_pass "$msg"
   else
-    __do_fail "$msg"
+    __do_fail "$msg" "$cmd" "$err"
   fi
 }
 
 function __do_check {
-  if $NO_STYLE; then
+  if $__no_style; then
     echo -ne "."
   else
     echo -ne "$(color green "$(icon check)")"
@@ -399,7 +417,7 @@ function __do_check {
 }
 
 function __do_x {
-  if $NO_STYLE; then
+  if $__no_style; then
     echo -ne "x"
   else
     echo -ne "$(color red "$(icon x)")"
@@ -407,18 +425,40 @@ function __do_x {
 }
 
 function __do_pass {
-  __do_check
+  local msg=$1
+  __total=`expr $__total + 1`
   __passed=`expr $__passed + 1`
+  if $__verbose; then
+    echo "$__total. $(__do_color green "$msg passed")"
+  else
+    __do_check
+  fi
 }
 
 function __do_fail {
-  __do_x
+  local msg=$1
+  local cmd=$2
+  local err=$3
+  __total=`expr $__total + 1`
   __failed=`expr $__failed + 1`
-  __failures+="$__failed] $1\n"
+
+  if $__verbose; then
+    echo "$__total. $(__do_color red "$msg failed")"
+  else
+    __do_x
+  fi
+
+  __failures+="$(__do_color red "$__failed. $msg")$(br)"
+  if test "$err" && ! $__quiet; then
+    if test "$cmd"; then
+      __failures+="$(__do_color yellow "$(i 2)'$cmd' failed with:$(br)$(i 2)")"
+    fi
+    __failures+="$(__do_color yellow "$(i 2) $err$(br)$(br)")"
+  fi
 }
 
 function __do_color {
-  if $NO_STYLE; then
+  if $__no_style; then
     echo "$2"
   else
     echo "$(color $1 "$2")"
@@ -426,18 +466,10 @@ function __do_color {
 }
 
 function finish {
-  echo " "
-  echo " "
-
-  echo -e "$(__do_color yellow "Total: `expr $__passed + $__failed`") $(__do_color green "Passed: $__passed") $(__do_color red "Failed: $__failed") $(__do_color blue "Duration: ${SECONDS} Seconds")"
-
-  if [ "$__failed" -ne "0" ]; then
-    echo " "
-    echo "Failures: "
-    echo " "
-    echo -e "$(__do_color red "$__failures")"
+  echo -e "$(br)$(br)$(__do_color yellow "Total: `expr $__passed + $__failed`") $(__do_color green "Passed: $__passed") $(__do_color red "Failed: $__failed") $(__do_color blue "Duration: ${SECONDS} Seconds")$(br)"
+  if [ "$__failed" -ne "0" ] && ! $__quiet; then
+    echo -e "Failures:$(br)$__failures"
   fi
-  echo " "
 }
 
 function __reset {
