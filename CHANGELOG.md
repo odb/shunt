@@ -1,9 +1,10 @@
 ## CHANGELOG
 
-### 0.1.2
+### 0.2.0
 
+* Renaming to 'shunt'.
 * Adding CLIstyle for coloring and icons.
-* Depricating legacy method of sourcing CLIunit.
+* Depricating legacy method of sourcing shunt.
 * Adding error trapping and output. Disabled via quite flag.
 * Adding verbose test output via verbose flag.
 * Fixing issues with before and after show errors when not present. See Issue #5.

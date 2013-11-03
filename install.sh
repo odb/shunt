@@ -50,13 +50,13 @@ fi
 options=$( echo $options )
 test "$options" && version=$options
 test "$version" || version="latest"
-source="https://raw.github.com/jmervine/CLIunit/$version/CLIunit.sh"
-target="CLIunit.sh"
-execln="cliunit"
+source="https://raw.github.com/jmervine/shunt/$version/shunt.sh"
+target="shunt.sh"
+execln="shunt"
 
 # display banner
 ##
-echo "Installing CLIunit"
+echo "Installing shunt"
 echo "------------------"
 echo " "
 
@@ -99,7 +99,7 @@ fi
 # update path
 ##
 
-export_string="\nexport PATH=$install_path:\$PATH # Add CLIunit to PATH"
+export_string="\nexport PATH=$install_path:\$PATH # Add shunt to PATH"
 report=false
 if [ "$install_method" = "user" ]; then
   if test -f $HOME/.zshrc; then
@@ -126,7 +126,7 @@ fi
 
 if $report; then
   echo " "
-  echo "NOTE: Please log out and log back in to ensure that 'cliunit' is available to your shell."
+  echo "NOTE: Please log out and log back in to ensure that 'shunt' is available to your shell."
 fi
 
 echo " "

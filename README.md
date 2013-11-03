@@ -1,16 +1,18 @@
-# [CLIunit](https://github.com/jmervine/CLIunit)
+# [shunt](https://github.com/jmervine/shunt)
 
-##### Simple CLI Testing Pseudo-Framework
+##### Simple Shell Testing Pseudo-Framework
 
-![Simple CLI Testing Pseudo-Framework](screenshots/cliunit_verbose.png)
+![Simple Shell Testing Pseudo-Framework](screenshots/shunt.png)
 
-![Simple CLI Testing Pseudo-Framework](screenshots/cliunit_quiet.png)
+![Simple Shell Testing Pseudo-Framework](screenshots/shunt_verbose.png)
+
+![Simple Shell Testing Pseudo-Framework](screenshots/shunt_quiet.png)
 
 ### What!? Why?
 
-For a recent project, I wanted a very simple way to run some simple tests against my CLI output.
+For a recent project, I wanted a very simple way to run some simple tests against my script output.
 I know there are a number of these kinds of things out there, but most of the ones I looked at were more complex then I wanted.
-To start, I created a basic shell script to test my CLI, but as I began to add to it, and want more from it, I decided to take
+To start, I created a basic shell script to test my scripts, but as I began to add to it, and want more from it, I decided to take
 a few minutes and build a pseudo-framework out of it.
 
 I call it a "pseudo-framework" because it's really more of a helper, which gives you a handfull of assertions to run against
@@ -20,19 +22,19 @@ bash commands. Well, that and it doesn't really have a name.
 
 ##### Install
 
-Note, in CLIunit `latest` means latest stable version.
+Note, in shunt `latest` means latest stable version.
 
-    curl -L https://raw.github.com/jmervine/CLIunit/master/install.sh | bash
-    # installs latest to ~/.bin/cliunit
+    curl -L https://raw.github.com/jmervine/shunt/master/install.sh | bash
+    # installs latest to ~/.bin/shunt
 
-    curl -L https://raw.github.com/jmervine/CLIunit/master/install.sh | bash -s master
-    # installs master to ~/.bin/cliunit
+    curl -L https://raw.github.com/jmervine/shunt/master/install.sh | bash -s master
+    # installs master to ~/.bin/shunt
 
-    curl -L https://raw.github.com/jmervine/CLIunit/master/install.sh | bash -s global
-    # installs latest to /usr/local/bin/cliunit
+    curl -L https://raw.github.com/jmervine/shunt/master/install.sh | bash -s global
+    # installs latest to /usr/local/bin/shunt
 
-    curl -L https://raw.github.com/jmervine/CLIunit/master/install.sh | bash -s master local
-    # installs master to ./CLIunit.sh
+    curl -L https://raw.github.com/jmervine/shunt/master/install.sh | bash -s master local
+    # installs master to ./shunt.sh
 
 ##### Basic Usage
 
@@ -58,11 +60,11 @@ A basic test file looks like this:
 
 Run like this:
 
-    $ ./CLIunit.sh ./tests.sh
+    $ ./shunt.sh ./tests.sh
 
 Usage:
 ``` bash
-Usage: ./CLIunit.sh <test files>
+Usage: ./shunt.sh <test files>
 
 Options:
 --plain    Disable colors and icons.
@@ -76,16 +78,16 @@ Options:
 
 ##### Before / After Hooks
 
-In addition to assertion, CLIunit also supports before and after hooks. Simply define a `before` or `after` function.
+In addition to assertion, shunt also supports before and after hooks. Simply define a `before` or `after` function.
 
     function before {
         ./some_setup_script.sh
-        echo "Running before CLIunit assertions.
+        echo "Running before shunt assertions.
     }
 
     function after {
         ./some_cleanup_script.sh
-        echo "Running after CLIunit assertions.
+        echo "Running after shunt assertions.
     }
 
 ##### Assertions

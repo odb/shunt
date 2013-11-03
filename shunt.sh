@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 ################################################################################
 #
-# Simple CLI Testing Psudo-Framework
+# Simple Shell Testing Psudo-Framework
 # ----------------------------------
 #
-# Source: https://github.com/jmervine/CLIunit
+# Source: https://github.com/jmervine/shunt
 # Author: Joshua Mervine (@mervinej)
 #
 # ----------------------------------
@@ -14,7 +14,7 @@
 #
 ################################################################################
 
-CLIUNIT_VERSION="0.1.2"
+SHUNT_VERSION="0.1.2"
 
 # Including an
 # Update version with `make clistyle`
@@ -216,7 +216,7 @@ function icon {
 #CLISTYLE:END
 
 if echo "$*" | grep "\-\-version" > /dev/null; then
-  echo "$0 version $CLIUNIT_VERSION"
+  echo "$0 version $SHUNT_VERSION"
   exit 0
 fi
 
@@ -480,7 +480,7 @@ function __reset {
   unset __failures
 }
 
-function __CLIunit {
+function __shunt {
   __ensure_handlers
   before
   run_tests
@@ -496,11 +496,11 @@ if test "$options"; then
   for f in $options; do
     echo "(Running $f from: $PWD)"
     source $f
-    __CLIunit
+    __shunt
   done
 else
   echo "(Running from: $PWD)"
-  __CLIunit
+  __shunt
 fi
 
 exit $__failed

@@ -2,14 +2,14 @@
 
 # Setup
 ##
-touch /tmp/cliunit.file
-mkdir -p /tmp/cliunit.dir
+touch /tmp/shunt.file
+mkdir -p /tmp/shunt.dir
 
 # Test Examples
 ##
 
-tmp_file=/tmp/cliunit.file
-tmp_dir=/tmp/cliunit.dir
+tmp_file=/tmp/shunt.file
+tmp_dir=/tmp/shunt.dir
 function before {
   touch $tmp_file
   mkdir -p $tmp_dir
@@ -36,11 +36,11 @@ function run_tests {
   assert_grep "echo foobar" "foobar" "should assert via grep"
   refute_grep "echo foobar" "notfoobar" "should refute via grep"
 
-  assert_file "/tmp/cliunit.file" "should assert file existence"
-  refute_file "/tmp/cliunit.bad"  "should refute file existence"
+  assert_file "/tmp/shunt.file" "should assert file existence"
+  refute_file "/tmp/shunt.bad"  "should refute file existence"
 
-  assert_dir "/tmp/cliunit.dir" "should assert directory existence"
-  refute_dir "/tmp/cliunit.bad" "should refute directory existence"
+  assert_dir "/tmp/shunt.dir" "should assert directory existence"
+  refute_dir "/tmp/shunt.bad" "should refute directory existence"
 
   # test before
   sleep 0.5 # showing Duration > 0
