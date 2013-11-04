@@ -14,26 +14,23 @@
 #
 ################################################################################
 
-SHUNT_VERSION="0.1.2"
+SHUNT_VERSION="0.2.0"
 
 # Including an
-# Update version with `make clistyle`
-#CLISTYLE:START
+# Update version with `make shml`
+#SHML:START
 #************************************************#
-#    CLIstyle - Style Framework for The Terminal
+#        shml - Shell Markup Framework
 #                    Beta
 #        by Justin Dorfman - @jdorfman
 #        && Joshua Mervine - @mervinej
 #
 #               Inspired by:
 #
-#       Kiyor Cia, Jeff Foard FLOZz' MISC,
+#      Kiyor Cia, Jeff Foard FLOZz' MISC,
 #           Mark Otto & Dave Gandy
 #
-#     NOTE: clistyle is a working title and may
-#     change at any time.
-#
-#     https://github.com/jdorfman/clistyle
+#          https://github.com/odb/shml
 #************************************************#
 
 # Foreground (Text)
@@ -213,7 +210,7 @@ function icon {
   esac
 }
 
-#CLISTYLE:END
+#SHML:END
 
 if echo "$*" | grep "\-\-version" > /dev/null; then
   echo "$0 version $SHUNT_VERSION"
