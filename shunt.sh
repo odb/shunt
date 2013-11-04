@@ -4,7 +4,7 @@
 # Simple Shell Testing Psudo-Framework
 # ----------------------------------
 #
-# Source: https://github.com/jmervine/shunt
+# Source: https://github.com/odb/shunt
 # Author: Joshua Mervine (@mervinej)
 #
 # ----------------------------------
