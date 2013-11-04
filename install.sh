@@ -50,7 +50,7 @@ fi
 options=$( echo $options )
 test "$options" && version=$options
 test "$version" || version="latest"
-source="https://raw.github.com/jmervine/shunt/$version/shunt.sh"
+source="https://raw.github.com/odb/shunt/$version/shunt.sh"
 target="shunt.sh"
 execln="shunt"
 
