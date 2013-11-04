@@ -1,12 +1,12 @@
-# [shunt](https://github.com/jmervine/shunt)
+# [shunt](https://github.com/odb/shunt)
 
 ##### Simple Shell Testing Pseudo-Framework
 
-[![Simple Shell Testing Pseudo-Framework](screenshots/shunt.png)](https://raw.github.com/jmervine/shunt/master/screenshots/shunt.png)
+[![Simple Shell Testing Pseudo-Framework](screenshots/shunt.png)](https://raw.github.com/odb/shunt/master/screenshots/shunt.png)
 
-[![Simple Shell Testing Pseudo-Framework](screenshots/shunt_verbose.png)](https://raw.github.com/jmervine/shunt/master/screenshots/shunt_verbose.png)
+[![Simple Shell Testing Pseudo-Framework](screenshots/shunt_verbose.png)](https://raw.github.com/odb/shunt/master/screenshots/shunt_verbose.png)
 
-[![Simple Shell Testing Pseudo-Framework](screenshots/shunt_quiet.png)](https://raw.github.com/jmervine/shunt/master/screenshots/shunt_quiet.png)
+[![Simple Shell Testing Pseudo-Framework](screenshots/shunt_quiet.png)](https://raw.github.com/odb/shunt/master/screenshots/shunt_quiet.png)
 
 ### What!? Why?
 
@@ -24,16 +24,16 @@ bash commands. Well, that and it doesn't really have a name.
 
 Note, in shunt `latest` means latest stable version.
 
-    curl -L https://raw.github.com/jmervine/shunt/master/install.sh | bash
+    curl -L https://raw.github.com/odb/shunt/master/install.sh | bash
     # installs latest to ~/.bin/shunt
 
-    curl -L https://raw.github.com/jmervine/shunt/master/install.sh | bash -s master
+    curl -L https://raw.github.com/odb/shunt/master/install.sh | bash -s master
     # installs master to ~/.bin/shunt
 
-    curl -L https://raw.github.com/jmervine/shunt/master/install.sh | bash -s global
+    curl -L https://raw.github.com/odb/shunt/master/install.sh | bash -s global
     # installs latest to /usr/local/bin/shunt
 
-    curl -L https://raw.github.com/jmervine/shunt/master/install.sh | bash -s master local
+    curl -L https://raw.github.com/odb/shunt/master/install.sh | bash -s master local
     # installs master to ./shunt.sh
 
 ##### Basic Usage
