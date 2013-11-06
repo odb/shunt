@@ -348,16 +348,20 @@ function assert_grep {
   local cmd=$1
   local inc=$2
   local msg="[assert_grep] $3"
-  _="$( { $cmd | grep $inc; } 2>&1 )"
-  process "$?" "$msg" "" "'$cmd' does not include '$inc'"
+  out="$( { $cmd; } 2>&1 )"
+  _="$( { echo $out | grep $inc; } 2>&1 )"
+  process "$?" "$msg" "$out" "'$cmd' does not include '$inc'"
+  unset out
 }
 
 function refute_grep {
   local cmd=$1
   local inc=$2
   local msg="[refute_grep] $3"
-  _="$( { $cmd | grep -v $inc; } 2>&1 )"
-  process "$?" "$msg" "" "'$cmd' includes '$inc'"
+  out="$( { $cmd; } 2>&1 )"
+  _="$( { echo $out | grep -v $inc; } 2>&1 )"
+  process "$?" "$msg" "$out" "'$cmd' includes '$inc'"
+  unset out
 }
 
 function assert_file {
@@ -491,12 +495,12 @@ function __shunt {
 ################################################################################
 if test "$options"; then
   for f in $options; do
-    echo "(Running $f from: $PWD)"
+    echo -e "(Running $f from: $PWD)$(br)"
     source $f
     __shunt
   done
 else
-  echo "(Running from: $PWD)"
+  echo -e "(Running from: $PWD)$(br)"
   __shunt
 fi
 
