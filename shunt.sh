@@ -309,7 +309,7 @@ function refute {
   local msg="[refute] $2"
   _="$( { $cmd; } 2>&1)"
   [ "$?" -ne "0" ]
-  process "$?" "$msg" "$cmd" "non-zero exit status"
+  process "$?" "$msg" "$cmd" "exit status is zero"
 }
 
 function assert_equal {

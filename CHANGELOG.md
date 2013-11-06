@@ -4,6 +4,7 @@
 
 * Adding line break after Running message (Issue: #12)
 * Tweaking assert|refute_grep (Issue: #13)
+* Fixing refute error message.
 
 ### 0.2.0
 
