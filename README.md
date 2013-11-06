@@ -107,13 +107,8 @@ Here's a full list of assertions at the time of this writing:
 * `assert_dir "DIR" "FAIL MESSAGE"`
 * `refute_dir "DIR" "FAIL MESSAGE"`
 
-##### Known Issues
-
-Currently, `assert_grep` and `refute_grep` only support a single word, no spaces. I'm sure there's a simple solution to this, but I haven't had
-a change to troubleshoot it yet and it wasn't an issue for my use case.
-
 
 ### Development
 
 * To run tests use: `make test`
-* To update clistyle.sh, use: `make clistyle`
+* To update shml.sh, use: `make shml`
