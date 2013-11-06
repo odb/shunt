@@ -1,5 +1,10 @@
 ## CHANGELOG
 
+### 0.2.1
+
+* Adding line break after Running message (Issue: #12)
+* Tweaking assert|refute_grep (Issue: #13)
+
 ### 0.2.0
 
 * Renaming to 'shunt'.
