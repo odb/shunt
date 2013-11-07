@@ -14,7 +14,7 @@
 #
 ################################################################################
 
-SHUNT_VERSION="0.2.1"
+SHUNT_VERSION="0.2.2"
 
 # Including an
 # Update version with `make shml`
@@ -350,7 +350,7 @@ function assert_grep {
   local msg="[assert_grep] $3"
   out="$( { $cmd; } 2>&1 )"
   _="$( { echo $out | grep $inc; } 2>&1 )"
-  process "$?" "$msg" "$out" "'$cmd' does not include '$inc'"
+  process "$?" "$msg" "$cmd" "'$out' does not include '$inc'"
   unset out
 }
 
@@ -360,7 +360,7 @@ function refute_grep {
   local msg="[refute_grep] $3"
   out="$( { $cmd; } 2>&1 )"
   _="$( { echo $out | grep -v $inc; } 2>&1 )"
-  process "$?" "$msg" "$out" "'$cmd' includes '$inc'"
+  process "$?" "$msg" "$cmd" "'$out' includes '$inc'"
   unset out
 }
 
