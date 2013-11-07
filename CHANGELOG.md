@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 0.2.2
+
+* Update assert|refute_grep error messaging.
+
 ### 0.2.1
 
 * Adding line break after Running message (Issue: #12)
