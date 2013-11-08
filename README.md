@@ -2,11 +2,11 @@
 
 ##### Simple Shell Testing Pseudo-Framework
 
-[![Simple Shell Testing Pseudo-Framework](https://raw.github.com/odb/shunt/master/screenshots/shunt.png)](https://raw.github.com/odb/shunt/master/screenshots/shunt.png)
+[<img src="https://raw.github.com/odb/shunt/master/screenshots/shunt.png" width="700" />](https://raw.github.com/odb/shunt/master/screenshots/shunt.png)
 
-[![Simple Shell Testing Pseudo-Framework](https://raw.github.com/odb/shunt/master/screenshots/shunt_verbose.png)](https://raw.github.com/odb/shunt/master/screenshots/shunt_verbose.png)
+[<img src="https://raw.github.com/odb/shunt/master/screenshots/shunt_verbose.png" width="700" />](https://raw.github.com/odb/shunt/master/screenshots/shunt_verbose.png)
 
-[![Simple Shell Testing Pseudo-Framework](https://raw.github.com/odb/shunt/master/screenshots/shunt_quiet.png)](https://raw.github.com/odb/shunt/master/screenshots/shunt_quiet.png)
+[<img src="https://raw.github.com/odb/shunt/master/screenshots/shunt_quiet.png" width="700" />](https://raw.github.com/odb/shunt/master/screenshots/shunt_quiet.png)
 
 ### What!? Why?
 
