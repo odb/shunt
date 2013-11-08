@@ -2,11 +2,11 @@
 
 ##### Simple Shell Testing Pseudo-Framework
 
-[<img src="https://raw.github.com/odb/shunt/master/screenshots/shunt.png" width="700" />](https://raw.github.com/odb/shunt/master/screenshots/shunt.png)
+[<img src="https://raw.github.com/odb/shunt/master/screenshots/shunt.png" width="725" />](https://raw.github.com/odb/shunt/master/screenshots/shunt.png)
 
-[<img src="https://raw.github.com/odb/shunt/master/screenshots/shunt_verbose.png" width="700" />](https://raw.github.com/odb/shunt/master/screenshots/shunt_verbose.png)
+[<img src="https://raw.github.com/odb/shunt/master/screenshots/shunt_verbose.png" width="725" />](https://raw.github.com/odb/shunt/master/screenshots/shunt_verbose.png)
 
-[<img src="https://raw.github.com/odb/shunt/master/screenshots/shunt_quiet.png" width="700" />](https://raw.github.com/odb/shunt/master/screenshots/shunt_quiet.png)
+[<img src="https://raw.github.com/odb/shunt/master/screenshots/shunt_quiet.png" width="725" />](https://raw.github.com/odb/shunt/master/screenshots/shunt_quiet.png)
 
 ### What!? Why?
 
