@@ -14,7 +14,7 @@
 #
 ################################################################################
 
-SHUNT_VERSION="0.2.2"
+SHUNT_VERSION="0.2.3"
 
 # Including an
 # Update version with `make shml`
@@ -468,17 +468,19 @@ function __do_color {
 
 function finish {
   echo -e "$(br)$(br)$(__do_color yellow "Total: `expr $__passed + $__failed`") $(__do_color green "Passed: $__passed") $(__do_color red "Failed: $__failed") $(__do_color blue "Duration: ${SECONDS} Seconds")$(br)"
-  if [ "$__failed" -ne "0" ] && ! $__quiet; then
+  if [ "$__failed" -ne 0 ] && ! $__quiet; then
     echo -e "Failures:$(br)$__failures"
   fi
 }
 
 function __reset {
+  __total=0
+  __passed=0
+  __failed=0
+  __failures=""
+  __successes=""
   unset before
   unset after
-  unset __passed
-  unset __failed
-  unset __failures
 }
 
 function __shunt {
@@ -496,8 +498,14 @@ function __shunt {
 if test "$options"; then
   for f in $options; do
     echo -e "(Running $f from: $PWD)$(br)"
+
+    # In an edge case, a test changes directory. It needs to be changed
+    # back after the test.
+    #######
+    ___path="$(pwd)"
     source $f
     __shunt
+    cd $___path
   done
 else
   echo -e "(Running from: $PWD)$(br)"
