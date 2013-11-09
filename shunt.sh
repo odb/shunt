@@ -187,27 +187,28 @@ function hr {
 }
 
 # Icons
-#
-# TODO: Replace with codes.
 ##
 function icon {
+  local i='';
   case "$1" in
-    check|checkmark)       echo -n '✓';;
-    X|x|xmark)             echo -n '✘';;
-    '<3'|heart)            echo -n '❤';;
-    sun)                   echo -n '☀';;
-    '*'|star)              echo -n '★';;
-    darkstar)              echo -n '☆';;
-    umbrella)              echo -n '☂';;
-    flag)                  echo -n '⚑';;
-    snow|snowflake)        echo -n '❄';;
-    music)                 echo -n '♫';;
-    scissors)              echo -n '✂';;
-    tm|trademark)          echo -n '™';;
-    copyright)             echo -n '©';;
-    apple)                 echo -n '';;
-    ':-)'|':)'|smile|face) echo -n '☺';;
+    check|checkmark)       i='\xE2\x9C\x93';;
+    X|x|xmark)             i='\xE2\x9C\x98';;
+    '<3'|heart)            i='\xE2\x9D\xA4';;
+    sun)                   i='\xE2\x98\x80';;
+    '*'|star)              i='\xE2\x98\x85';;
+    darkstar)              i='\xE2\x98\x86';;
+    umbrella)              i='\xE2\x98\x82';;
+    flag)                  i='\xE2\x9A\x91';;
+    snow|snowflake)        i='\xE2\x9D\x84';;
+    music)                 i='\xE2\x99\xAB';;
+    scissors)              i='\xE2\x9C\x82';;
+    tm|trademark)          i='\xE2\x84\xA2';;
+    copyright)             i='\xC2\xA9';;
+    apple)                 i='\xEF\xA3\xBF';;
+    skull|bones)           i='\xE2\x98\xA0';;
+    ':-)'|':)'|smile|face) i='\xE2\x98\xBA';;
   esac
+  echo -ne "$i";
 }
 
 #SHML:END
