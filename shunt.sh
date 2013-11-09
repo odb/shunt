@@ -143,11 +143,11 @@ function a {
 
 ## Elements
 function br {
-  echo '\n'
+  echo -e "\n\r"
 }
 
 function tab {
-  echo '\t'
+  echo -e "\t"
 }
 
 function indent {
