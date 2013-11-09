@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 0.2.3
+
+* Fixing multi-file run errors for issues #11.
+
 ### 0.2.2
 
 * Update assert|refute_grep error messaging.
