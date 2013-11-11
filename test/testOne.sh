@@ -21,9 +21,6 @@ function after {
 }
 
 function run_tests {
-
-  echo "These should pass:"
-
   assert "true"  "should assert truth"
   refute "false" "should refute truth"
 
@@ -45,9 +42,6 @@ function run_tests {
   # test before
   sleep 0.5 # showing Duration > 0
   assert_file "$tmp_file" "before or assert_file didn't work"
-
-  echo -e "\nThis should fail:"
-
   assert "cat missing.file" "should fail, to show failure output"
 }
 
