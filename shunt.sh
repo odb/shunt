@@ -14,7 +14,7 @@
 #
 ################################################################################
 
-SHUNT_VERSION="0.2.3"
+SHUNT_VERSION="0.2.4"
 
 # Including an
 # Update version with `make shml`
@@ -233,19 +233,11 @@ EOF
 exit 0
 }
 
-options="$*"
+options="$@"
 
 # Usage - TODO: iterate of arguments
 ##
-if ! test "$options"; then
-  __usage
-fi
-
-if echo "$options" | grep "\-\-help" > /dev/null; then
-  __usage
-fi
-
-if echo "$options" | grep "\-h" > /dev/null; then
+if echo "$options" | grep "\-h" > /dev/null; then # also matches '--help'
   __usage
 fi
 
@@ -273,27 +265,21 @@ if echo "$options" | grep "\-\-verbose" > /dev/null; then
   options="$(echo "$options" | sed 's/--verbose//')"
 fi
 
+# Files
+##
+if ! test "$options"; then __usage; fi
+
 # Before/After function handling
 ##
 function __ensure_handlers {
   _="$( { type before; } 2>&1 )"
-  if [ "$?" -ne "0" ]; then
-    function before {
-      true
-    }
-  fi
-
+  if [ "$?" -ne "0" ]; then function before { true; }; fi
   _="$( { type after; } 2>&1 )"
-  if [ "$?" -ne "0" ]; then
-    function after {
-      true
-    }
-  fi
+  if [ "$?" -ne "0" ]; then function after { true; }; fi
 }
 
 # Progress Variables
-__total=0; __passed=0; __failed=0; __failures=""; __successes=""
-
+__total=0; __passed=0; __failed=0; __failures=""; __successes=""; __current=""; __last=""
 ################################################################################
 # Assertions
 ################################################################################
@@ -450,7 +436,12 @@ function __do_fail {
     __do_x
   fi
 
-  __failures+="$(__do_color red "$__failed. $msg")$(br)"
+  if [ "$__last" != "$__current" ]; then
+    __failures+="$(br)$__current$(br)"
+    __last=$__current
+  fi
+
+  __failures+="$(__do_color red "$__total. $msg")$(br)"
   if test "$err" && ! $__quiet; then
     if test "$cmd"; then
       __failures+="$(__do_color yellow "$(i 2)'$cmd' failed with:$(br)$(i 2)")"
@@ -467,19 +458,20 @@ function __do_color {
   fi
 }
 
-function finish {
-  echo -e "$(br)$(br)$(__do_color yellow "Total: `expr $__passed + $__failed`") $(__do_color green "Passed: $__passed") $(__do_color red "Failed: $__failed") $(__do_color blue "Duration: ${SECONDS} Seconds")$(br)"
+function __failures {
   if [ "$__failed" -ne 0 ] && ! $__quiet; then
-    echo -e "Failures:$(br)$__failures"
+    echo "$(br)$(br)Failures:$(br)$(hr)$(br)$__failures"
   fi
 }
 
+function __finish {
+  __failures
+  if $__verbose; then echo -n "$(hr)"; fi
+  if $__quiet; then echo " "; fi
+  echo "$(__do_color yellow "$(br)Total: `expr $__passed + $__failed`")  $(__do_color green "Passed: $__passed")  $(__do_color red "Failed: $__failed")  $(__do_color blue "Duration: ${SECONDS} Seconds")$(br)"
+}
+
 function __reset {
-  __total=0
-  __passed=0
-  __failed=0
-  __failures=""
-  __successes=""
   unset before
   unset after
 }
@@ -489,30 +481,30 @@ function __shunt {
   before
   run_tests
   after
-  finish
-  __reset
 }
 
 ################################################################################
 # Make is so.
 ################################################################################
-if test "$options"; then
-  for f in $options; do
-    echo -e "(Running $f from: $PWD)$(br)"
 
-    # In an edge case, a test changes directory. It needs to be changed
-    # back after the test.
-    #######
-    ___path="$(pwd)"
-    source $f
-    __shunt
-    cd $___path
-  done
-else
-  echo -e "(Running from: $PWD)$(br)"
+echo "$(basename -- $0) $@"
+if $__verbose; then echo "$(hr '=')"; fi
+echo " "
+
+# In an edge case, a test changes directory. It needs to be changed
+# back after the test.
+#######
+here="$(pwd)"
+
+for __current in $options; do
+  __reset
+  source $__current
+  if $__verbose; then echo "$(br)$__current$(br)$(hr)$(br)"; fi
   __shunt
-fi
+  cd $here
+done
 
+__finish
 exit $__failed
 
 # vim: ft=sh:
