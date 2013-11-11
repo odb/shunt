@@ -461,6 +461,8 @@ function __do_color {
 function __failures {
   if [ "$__failed" -ne 0 ] && ! $__quiet; then
     echo "$(br)$(br)Failures:$(br)$(hr)$(br)$__failures"
+  else
+    echo " "
   fi
 }
 
