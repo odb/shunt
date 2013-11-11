@@ -2,11 +2,7 @@
 
 ##### Simple Shell Testing Pseudo-Framework
 
-[<img src="https://raw.github.com/odb/shunt/master/screenshots/shunt.png" width="725" />](https://raw.github.com/odb/shunt/master/screenshots/shunt.png)
-
-[<img src="https://raw.github.com/odb/shunt/master/screenshots/shunt_verbose.png" width="725" />](https://raw.github.com/odb/shunt/master/screenshots/shunt_verbose.png)
-
-[<img src="https://raw.github.com/odb/shunt/master/screenshots/shunt_quiet.png" width="725" />](https://raw.github.com/odb/shunt/master/screenshots/shunt_quiet.png)
+[![shunt](https://raw.github.com/odb/shunt/master/screenshots/shunt.png)]](https://raw.github.com/odb/shunt/master/screenshots/shunt.png)
 
 ### What!? Why?
 
@@ -112,3 +108,12 @@ Here's a full list of assertions at the time of this writing:
 
 * To run tests use: `make test`
 * To update shml.sh, use: `make shml`
+
+### Additional Screenshots
+
+[![shunt --verbose](https://raw.github.com/odb/shunt/master/screenshots/shunt_verbose.png)]](https://raw.github.com/odb/shunt/master/screenshots/shunt_verbose.png)
+
+[![shunt --quiet](https://raw.github.com/odb/shunt/master/screenshots/shunt_quiet.png)]](https://raw.github.com/odb/shunt/master/screenshots/shunt_quiet.png)
+
+[![shunt --plain](https://raw.github.com/odb/shunt/master/screenshots/shunt_plain.png)]](https://raw.github.com/odb/shunt/master/screenshots/shunt_plain.png)
+
