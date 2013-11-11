@@ -237,11 +237,7 @@ options="$@"
 
 # Usage - TODO: iterate of arguments
 ##
-if echo "$options" | grep "\-\-help" > /dev/null; then
-  __usage
-fi
-
-if echo "$options" | grep "\-h" > /dev/null; then
+if echo "$options" | grep "\-h" > /dev/null; then # also matches '--help'
   __usage
 fi
 
@@ -271,32 +267,19 @@ fi
 
 # Files
 ##
-if ! test "$options"; then
-  __usage
-fi
-
+if ! test "$options"; then __usage; fi
 
 # Before/After function handling
 ##
 function __ensure_handlers {
   _="$( { type before; } 2>&1 )"
-  if [ "$?" -ne "0" ]; then
-    function before {
-      true
-    }
-  fi
-
+  if [ "$?" -ne "0" ]; then function before { true; }; fi
   _="$( { type after; } 2>&1 )"
-  if [ "$?" -ne "0" ]; then
-    function after {
-      true
-    }
-  fi
+  if [ "$?" -ne "0" ]; then function after { true; }; fi
 }
 
 # Progress Variables
-__total=0; __passed=0; __failed=0; __failures=""; __successes=""
-
+__total=0; __passed=0; __failed=0; __failures=""; __successes=""; __current=""; __last=""
 ################################################################################
 # Assertions
 ################################################################################
@@ -440,8 +423,6 @@ function __do_pass {
   fi
 }
 
-
-__last=''
 function __do_fail {
   local msg=$1
   local cmd=$2
@@ -510,19 +491,19 @@ echo "$(basename -- $0) $@"
 if $__verbose; then echo "$(hr '=')"; fi
 echo " "
 
-__current=''
-for __current in $options; do
+# In an edge case, a test changes directory. It needs to be changed
+# back after the test.
+#######
+here="$(pwd)"
 
-  # In an edge case, a test changes directory. It needs to be changed
-  # back after the test.
-  #######
-  ___path="$(pwd)"
-  __reset;
+for __current in $options; do
+  __reset
   source $__current
   if $__verbose; then echo "$(br)$__current$(br)$(hr)$(br)"; fi
   __shunt
-  cd $___path
+  cd $here
 done
+
 __finish
 exit $__failed
 
