@@ -2,7 +2,7 @@
 
 ##### Simple Shell Testing Pseudo-Framework
 
-[![shunt](https://raw.github.com/odb/shunt/master/screenshots/shunt.png)]](https://raw.github.com/odb/shunt/master/screenshots/shunt.png)
+[![shunt](https://raw.github.com/odb/shunt/master/screenshots/shunt.png)](https://raw.github.com/odb/shunt/master/screenshots/shunt.png)
 
 ### What!? Why?
 
@@ -111,9 +111,9 @@ Here's a full list of assertions at the time of this writing:
 
 ### Additional Screenshots
 
-[![shunt --verbose](https://raw.github.com/odb/shunt/master/screenshots/shunt_verbose.png)]](https://raw.github.com/odb/shunt/master/screenshots/shunt_verbose.png)
+[![shunt --verbose](https://raw.github.com/odb/shunt/master/screenshots/shunt_verbose.png)](https://raw.github.com/odb/shunt/master/screenshots/shunt_verbose.png)
 
-[![shunt --quiet](https://raw.github.com/odb/shunt/master/screenshots/shunt_quiet.png)]](https://raw.github.com/odb/shunt/master/screenshots/shunt_quiet.png)
+[![shunt --quiet](https://raw.github.com/odb/shunt/master/screenshots/shunt_quiet.png)](https://raw.github.com/odb/shunt/master/screenshots/shunt_quiet.png)
 
-[![shunt --plain](https://raw.github.com/odb/shunt/master/screenshots/shunt_plain.png)]](https://raw.github.com/odb/shunt/master/screenshots/shunt_plain.png)
+[![shunt --plain](https://raw.github.com/odb/shunt/master/screenshots/shunt_plain.png)](https://raw.github.com/odb/shunt/master/screenshots/shunt_plain.png)
 
