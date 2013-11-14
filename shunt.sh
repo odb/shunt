@@ -105,7 +105,7 @@ function bg {
 function color-bar {
   if test "$2"; then
     for i in "$@"; do
-      echo -en "`background "$i" " "`"
+      echo -en "$(background "$i" " ")"
     done; echo
   else
     for i in {16..21}{21..16}; do
@@ -471,8 +471,8 @@ function __do_x {
 
 function __do_pass {
   local msg=$1
-  __total=`expr $__total + 1`
-  __passed=`expr $__passed + 1`
+  __total=$(expr $__total + 1)
+  __passed=$(expr $__passed + 1)
   if $__verbose; then
     echo "$__total. $(__do_color green "$msg passed")"
   else
@@ -484,8 +484,8 @@ function __do_fail {
   local msg=$1
   local cmd=$2
   local err=$3
-  __total=`expr $__total + 1`
-  __failed=`expr $__failed + 1`
+  __total=$(expr $__total + 1)
+  __failed=$(expr $__failed + 1)
 
   if $__verbose; then
     echo "$__total. $(__do_color red "$msg failed")"
@@ -527,7 +527,7 @@ function __finish {
   __failures
   if $__verbose; then echo -n "$(hr)"; fi
   if $__quiet; then echo " "; fi
-  echo "$(__do_color yellow "$(br)Total: `expr $__passed + $__failed`")  $(__do_color green "Passed: $__passed")  $(__do_color red "Failed: $__failed")  $(__do_color blue "Duration: ${SECONDS} Seconds")$(br)"
+  echo "$(__do_color yellow "$(br)Total: $(expr $__passed + $__failed)")  $(__do_color green "Passed: $__passed")  $(__do_color red "Failed: $__failed")  $(__do_color blue "Duration: ${SECONDS} Seconds")$(br)"
 }
 
 function __reset {
