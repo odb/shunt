@@ -51,14 +51,15 @@ if echo "$options" | grep "\-\-plain" > /dev/null; then
   options="$(echo "$options" | sed 's/--plain//')"
 fi
 
-if ! source shml.sh 2&>1 > /dev/null; then
+source shml.sh 2> /dev/null
+if [ "$?" -ne 0 ]; then
   if ! $__no_style; then
-    echo "Warning: Forcing '--plain', as shml.sh was not found."
+    function br { echo -e "\n\r"; }
+    function i  { echo '  '; }
+    function hr { echo -e "-----------------------------------------------"; }
+    echo "$(hr)$(br)Warning:$(br)$(br)Forcing '--plain' as shml.sh was not found.$(br)$(br) See: github.com/odb/shml$(br)$(hr)$(br)"
     __no_style=true
     # implement few required from shml.sh
-    #function br { echo -e "\n\r"; }
-    #function i  { echo '  '; }
-    #function hr { echo -e "----------------------------------"; }
   fi
 fi
 

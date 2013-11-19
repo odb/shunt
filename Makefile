@@ -3,6 +3,9 @@ test: .PHONY
 	@./shunt.sh ./test/testOne.sh ./test/testTwo.sh
 
 shml:
-	bash ./scripts/update_shml.sh
+	wget https://raw.github.com/odb/shml/master/shml.sh
+
+#shml:
+	#bash ./scripts/update_shml.sh
 
 .PHONY:
