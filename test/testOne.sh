@@ -30,7 +30,7 @@ function run_tests {
   assert_numeq "1111" "1111" "should assert numerical equality"
   refute_numeq "1111" "1112" "should refute numerical equality"
 
-  assert_grep "echo foobar" "foobar" "should assert via grep"
+  assert_grep "echo 'foo bar'" "foo bar" "should assert via grep"
   refute_grep "echo foobar" "notfoobar" "should refute via grep"
 
   assert_file "/tmp/shunt.file" "should assert file existence"

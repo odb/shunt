@@ -393,7 +393,7 @@ function assert_grep {
   local inc=$2
   local msg="[assert_grep] $3"
   out="$( { $cmd; } 2>&1 )"
-  _="$( { echo $out | grep $inc; } 2>&1 )"
+  _="$( { echo "$out" | grep "$inc"; } 2>&1 )"
   process "$?" "$msg" "$cmd" "'$out' does not include '$inc'"
   unset out
 }
@@ -403,7 +403,7 @@ function refute_grep {
   local inc=$2
   local msg="[refute_grep] $3"
   out="$( { $cmd; } 2>&1 )"
-  _="$( { echo $out | grep -v $inc; } 2>&1 )"
+  _="$( { echo "$out" | grep -v "$inc"; } 2>&1 )"
   process "$?" "$msg" "$cmd" "'$out' includes '$inc'"
   unset out
 }
