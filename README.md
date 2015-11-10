@@ -32,6 +32,10 @@ Note, in shunt `latest` means latest stable version.
     curl -L https://raw.githubusercontent.com/odb/shunt/master/install.sh | bash -s master local
     # installs master to ./shunt.sh
 
+##### Pretty Printing
+
+`shunt` uses [`shml`](https://github.com/MaxCDN/shml/) for pretty printing when available. See it's [README](https://github.com/MaxCDN/shml/) for installation details.
+
 ##### Basic Usage
 
 A basic test file looks like this:
