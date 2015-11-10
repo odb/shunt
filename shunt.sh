@@ -14,7 +14,7 @@
 #
 ################################################################################
 
-SHUNT_VERSION="0.2.5"
+SHUNT_VERSION="0.2.6"
 
 # Including an
 # Update version with `make shml`
