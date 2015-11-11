@@ -14,7 +14,7 @@
 #
 ################################################################################
 
-SHUNT_VERSION="0.2.6"
+SHUNT_VERSION="0.3.0"
 
 if echo "$*" | grep "\-\-version" > /dev/null; then
   echo "$0 version $SHUNT_VERSION"
