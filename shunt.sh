@@ -52,14 +52,6 @@ if echo "$options" | grep "\-\-plain" > /dev/null; then
   options="$(echo "$options" | sed 's/--plain//')"
 fi
 
-if ! test "$(which shml)"; then
-  __no_style=true
-fi
-
-if ! $__no_style; then
-  source $(which shml)
-fi
-
 # quiet
 ##
 __quiet=false
@@ -195,6 +187,24 @@ function refute_dir {
 ################################################################################
 # Utils
 ################################################################################
+__red=""
+__green=""
+__yellow=""
+__blue=""
+__reset=""
+__check="."
+__x="x"
+
+if ! $__no_style; then
+  __red="\033[31m"
+  __green="\033[32m"
+  __yellow="\033[33m"
+  __blue="\033[34m"
+  __reset="\033[39m"
+  __check="${__green}\xE2\x9C\x93${__reset}"
+  __x="${__red}\xE2\x9C\x98${__reset}"
+fi
+
 function process {
   local status=$1
   local msg=$2
@@ -207,30 +217,14 @@ function process {
   fi
 }
 
-function __do_check {
-  if $__no_style; then
-    echo -ne "."
-  else
-    echo -ne "$(color green "$(icon check)")"
-  fi
-}
-
-function __do_x {
-  if $__no_style; then
-    echo -ne "x"
-  else
-    echo -ne "$(color red "$(icon x)")"
-  fi
-}
-
 function __do_pass {
   local msg=$1
   __total=$(expr $__total + 1)
   __passed=$(expr $__passed + 1)
   if $__verbose; then
-    echo "$__total. $(__do_color green "$msg passed")"
+    echo "$__total. ${__green}$msg passed${__reset}"
   else
-    __do_check
+    echo -ne $__check
   fi
 }
 
@@ -242,9 +236,9 @@ function __do_fail {
   __failed=$(expr $__failed + 1)
 
   if $__verbose; then
-    echo "$__total. $(__do_color red "$msg failed")"
+    echo "$__total. ${__red}$msg failed${__reset}"
   else
-    __do_x
+    echo -ne $__x
   fi
 
   if [ "$__last" != "$__current" ]; then
@@ -252,20 +246,12 @@ function __do_fail {
     __last=$__current
   fi
 
-  __failures+="$(__do_color red "$__total. $msg")\n"
+  __failures+="${__red}$__total. $msg${__reset}\n"
   if test "$err" && ! $__quiet; then
     if test "$cmd"; then
-      __failures+="$(__do_color yellow "  '$cmd' failed with:\n  ")"
+      __failures+="${__yellow}  '$cmd' failed with:\n${__reset}"
     fi
-    __failures+="$(__do_color yellow "   $err\n\n")"
-  fi
-}
-
-function __do_color {
-  if $__no_style; then
-    echo "$2"
-  else
-    echo "$(color $1 "$2")"
+    __failures+="${__yellow}   $err\n\n${__reset}"
   fi
 }
 
@@ -281,7 +267,7 @@ function __finish {
   __failures
   if $__verbose; then echo -n "--------------------------------------------------------------------------------"; fi
   if $__quiet; then echo " "; fi
-  echo -e "$(__do_color yellow "\nTotal: $(expr $__passed + $__failed)")  $(__do_color green "Passed: $__passed")  $(__do_color red "Failed: $__failed")  $(__do_color blue "Duration: ${SECONDS} Seconds")\n"
+  echo -e "${__yellow}\nTotal: $(expr $__passed + $__failed)  ${__green}Passed: $__passed  ${__red}Failed: $__failed  ${__blue}Duration: ${SECONDS} Seconds${__reset}\n"
 }
 
 function __reset {
