@@ -107,7 +107,6 @@ Here's a full list of assertions at the time of this writing:
 ### Development
 
 * To run tests use: `make test`
-* To update shml.sh, use: `make shml`
 
 ### Additional Screenshots
 
