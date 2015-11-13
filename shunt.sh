@@ -14,7 +14,7 @@
 #
 ################################################################################
 
-SHUNT_VERSION="0.3.0"
+SHUNT_VERSION="0.3.1"
 
 if echo "$*" | grep "\-\-version" > /dev/null; then
   echo "$0 version $SHUNT_VERSION"
@@ -222,7 +222,7 @@ function __do_pass {
   __total=$(expr $__total + 1)
   __passed=$(expr $__passed + 1)
   if $__verbose; then
-    echo "$__total. ${__green}$msg passed${__reset}"
+    echo -e "$__total. ${__green}$msg passed${__reset}"
   else
     echo -ne $__check
   fi
@@ -236,7 +236,7 @@ function __do_fail {
   __failed=$(expr $__failed + 1)
 
   if $__verbose; then
-    echo "$__total. ${__red}$msg failed${__reset}"
+    echo -e "$__total. ${__red}$msg failed${__reset}"
   else
     echo -ne $__x
   fi
@@ -265,7 +265,7 @@ function __failures {
 
 function __finish {
   __failures
-  if $__verbose; then echo -n "--------------------------------------------------------------------------------"; fi
+  if $__verbose; then echo "--------------------------------------------------------------------------------"; fi
   if $__quiet; then echo " "; fi
   echo -e "${__yellow}\nTotal: $(expr $__passed + $__failed)  ${__green}Passed: $__passed  ${__red}Failed: $__failed  ${__blue}Duration: ${SECONDS} Seconds${__reset}\n"
 }
@@ -287,7 +287,7 @@ function __shunt {
 ################################################################################
 
 echo "$(basename -- $0) $@"
-if $__verbose; then echo "$(hr '=')"; fi
+if $__verbose; then echo "================================================================================"; fi
 echo " "
 
 # In an edge case, a test changes directory. It needs to be changed
@@ -298,7 +298,7 @@ here="$(pwd)"
 for __current in $options; do
   __reset
   source $__current
-  if $__verbose; then echo "$(br)$__current$(br)$(hr)$(br)"; fi
+  if $__verbose; then echo -ne "\n$__current\n--------------------------------------------------------------------------------\n"; fi
   __shunt
   cd $here
 done
