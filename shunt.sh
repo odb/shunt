@@ -36,41 +36,41 @@ EOF
 exit 0
 }
 
-options="$@"
+__options="$@"
 
 # Usage - TODO: iterate of arguments
 ##
-if echo "$options" | grep "\-h" > /dev/null; then # also matches '--help'
+if echo "$__options" | grep "\-h" > /dev/null; then # also matches '--help'
   __usage
 fi
 
 # Style
 ##
 __no_style=false
-if echo "$options" | grep "\-\-plain" > /dev/null; then
+if echo "$__options" | grep "\-\-plain" > /dev/null; then
   __no_style=true
-  options="$(echo "$options" | sed 's/--plain//')"
+  __options="$(echo "$__options" | sed 's/--plain//')"
 fi
 
 # quiet
 ##
 __quiet=false
-if echo "$options" | grep "\-\-quiet" > /dev/null; then
+if echo "$__options" | grep "\-\-quiet" > /dev/null; then
   __quiet=true
-  options="$(echo "$options" | sed 's/--quiet//')"
+  __options="$(echo "$__options" | sed 's/--quiet//')"
 fi
 
 # Verbose
 ##
 __verbose=false
-if echo "$options" | grep "\-\-verbose" > /dev/null; then
+if echo "$__options" | grep "\-\-verbose" > /dev/null; then
   __verbose=true
-  options="$(echo "$options" | sed 's/--verbose//')"
+  __options="$(echo "$__options" | sed 's/--verbose//')"
 fi
 
 # Files
 ##
-if ! test "$options"; then __usage; fi
+if ! test "$__options"; then __usage; fi
 
 # Before/After function handling
 ##
@@ -295,7 +295,7 @@ echo " "
 #######
 here="$(pwd)"
 
-for __current in $options; do
+for __current in $__options; do
   __reset
   source $__current
   if $__verbose; then echo -ne "\n$__current\n--------------------------------------------------------------------------------\n"; fi
